@@ -11,8 +11,13 @@ import { UserToken } from '../shared/interfaces/user-token.model';
 export class AuthService {
   user = new BehaviorSubject<UserToken>(null);
   expirationTimer: any;
+  isAuthenticated = false;
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  getIsAuth() {
+    return this.isAuthenticated;
+  }
 
   loginUser(user: LoginUser) {
     return this.http
@@ -26,6 +31,7 @@ export class AuthService {
 
   logout() {
     this.user.next(null);
+    this.isAuthenticated = false;
     this.router.navigateByUrl('/login');
     localStorage.clear();
     if (this.expirationTimer) {
@@ -40,6 +46,7 @@ export class AuthService {
     this.user.next(user);
     this.autoLogout(604800 * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
+    this.isAuthenticated = true;
   }
 
   autoLogout(expirationDuration: number) {
@@ -51,6 +58,7 @@ export class AuthService {
   autoLogin() {
     const userData: UserToken = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
+      this.isAuthenticated = false;
       return;
     }
 
@@ -65,5 +73,6 @@ export class AuthService {
       const expirationDuration = new Date(userData.expirationDate).getTime() - new Date().getTime();
       this.autoLogout(expirationDuration);
     }
+    this.isAuthenticated = true;
   }
 }
