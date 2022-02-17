@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
-import { LoginUser } from '../shared/interfaces/login-user.model';
-import { UserToken } from '../shared/interfaces/user-token.model';
+import { LoginUser } from '../shared/models/login-user.interface';
+import { RegisterUser } from '../shared/models/register-user.interface';
+import { UserToken } from '../shared/models/user-token.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,16 @@ export class AuthService {
   loginUser(user: LoginUser) {
     return this.http
       .post<UserToken>('http://localhost:5000/api/users/login', user)
+      .pipe(
+        tap( (resData) => {
+          this.handleAuthentication(resData);
+        })
+      )
+  }
+
+  registerUser(user: RegisterUser) {
+    return this.http
+      .post<UserToken>('http://localhost:5000/api/users/register', user)
       .pipe(
         tap( (resData) => {
           this.handleAuthentication(resData);

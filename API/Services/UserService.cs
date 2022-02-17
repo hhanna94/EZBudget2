@@ -17,14 +17,12 @@ namespace API.Services
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
 
-        public UserService(DataContext context, ITokenService tokenService)
-        {
+        public UserService(DataContext context, ITokenService tokenService) {
             _context = context;
             _tokenService = tokenService;
         }
 
-        public async Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers()
-        {
+        public async Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers() {
             return await _context.Users.ToListAsync();
         }
 
@@ -32,28 +30,6 @@ namespace API.Services
         {
             return _context.Users.Find(id);
         }
-
-        // public async Task<ActionResult<UserDTO>> LoginUser(LoginDTO loginUser)
-        // {
-        //     string invalidMessage = "Invalid username or password.";
-
-        //     var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginUser.UserName.ToLower());
-
-        //     if (user == null) return Unauthorized(invalidMessage);
-
-        //     using var hmac = new HMACSHA512(user.PasswordSalt);
-        //     var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginUser.Password));
-        //     for (int i = 0; i < computedHash.Length; i++)
-        //     {
-        //         if (computedHash[i] != user.PasswordHash[i]) return Unauthorized(invalidMessage);
-        //     }
-
-        //     return new UserDTO
-        //     {
-        //         UserName = user.UserName,
-        //         Token = _tokenService.CreateToken(user)
-        //     };
-        // }
 
         public UserModel FindUserByUsername(string username) {
             var user =  _context.Users.SingleOrDefault(x => x.UserName == username.ToLower());
@@ -85,6 +61,8 @@ namespace API.Services
             var user = new UserModel
             {
                 UserName = registerUser.UserName.ToLower(),
+                FirstName = registerUser.FirstName,
+                LastName = registerUser.LastName,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerUser.Password)),
                 PasswordSalt = hmac.Key
             };
