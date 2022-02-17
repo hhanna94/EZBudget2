@@ -24,7 +24,7 @@
         <input type="password" name="confirmPassword" class="form-control" ngModel required #confirmPassword>
       </div>
       <p *ngIf="password.value !== confirmPassword.value" class="text-danger text-center">Passwords must match.</p>
-      <div class="text-center mb-3"><input [disabled]="!registerForm.valid" type="submit" value="Login" class="btn app-btn-secondary"></div>
+      <div class="text-center mb-3"><input [disabled]="!registerForm.valid || password.value !== confirmPassword.value" type="submit" value="Login" class="btn app-btn-secondary"></div>
     </form>
     <p class="text-center">Already a user? <a href="Login">Login here!</a></p>
   </div>

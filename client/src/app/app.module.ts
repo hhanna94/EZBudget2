@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
-import { BudgetDetailComponent } from './budget/budget-detail/budget-detail.component';
 
 @NgModule({
   declarations: [

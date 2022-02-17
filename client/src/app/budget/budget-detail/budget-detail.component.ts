@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./budget-detail.component.css']
 })
 export class BudgetDetailComponent implements OnInit {
+  budgets = [];
 
   constructor() { }
 
