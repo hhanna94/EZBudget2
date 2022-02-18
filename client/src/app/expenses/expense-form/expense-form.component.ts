@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExpenseService } from '../expense.service';
 
 @Component({
   selector: 'app-expense-form',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expense-form.component.css']
 })
 export class ExpenseFormComponent implements OnInit {
+  categories = [];
 
-  constructor() { }
+  constructor(private expenseService: ExpenseService) { }
 
   ngOnInit(): void {
+    this.categories = this.expenseService.categories; 
   }
 
 }

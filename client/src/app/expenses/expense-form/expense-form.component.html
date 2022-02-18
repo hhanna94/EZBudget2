@@ -1,17 +1,9 @@
 <form class="d-flex justify-content-between gap-2">
-  <input type="text" name="Name" id="Name" class="form-control">
-  <input type="number" name="Amount" id="Amount" class="form-control">
-  <select name="Category" id="Category" class="form-select">
-    <option value="">---</option>
-    <option value="Rent/Mortgage">Rent/Mortgage</option>
-    <option value="Credit Card/Loans">Credit Card/Loans</option>
-    <option value="Utilities">Utilities</option>
-    <option value="Car">Car</option>
-    <option value="Groceries">Groceries</option>
-    <option value="Health">Health</option>
-    <option value="Entertainment">Entertainment</option>
-    <option value="Misc">Misc</option>
+  <input type="text" name="Description" id="Description" class="form-control" placeholder="Description" style="width: 50%">
+  <input type="number" name="Amount" id="Amount" class="form-control" placeholder="Amount" style="width: 20%">
+  <select name="Category" id="Category" class="form-select" style="width: 30%">
+    <option value="">-- Category --</option>
+    <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
   </select>
   <input type="submit" value="Add" class="btn app-btn-secondary">
-
 </form>
