@@ -1,1 +1,49 @@
-<p>budget-form works!</p>
+
+<form action="" >
+  <div class="d-flex justify-content-between mt-4">
+    <div class="w-50">
+      <h5>Name Budget</h5>
+      <input type="text" name="Name" class="form-control" >
+    </div>
+    <div>
+      <h5>Set Income</h5>
+      <input type="number" name="Income" class="form-control" />
+    </div>
+
+  </div>
+  <hr>
+  <div class="d-flex justify-content-between align-items-start">
+    <div class="w-50">
+      <h5>Set Amount To Remain In Account</h5>
+      <input type="number" name="Remainder" class="form-control w-50"/>
+    </div>
+    <div>
+      <h5>Set Savings Goal</h5>
+      <input type="text" name="Savings" class="form-control">
+    </div>
+  </div>
+  <hr>
+  <h5>Estimate Monthly Expenses</h5>
+  <div class="d-flex justify-content-between">
+    <div>
+      <div *ngFor="let category of categories1">
+        <label for="{{ category }}">{{ category }}</label>
+        <input type="number" name="{{ category }}" class="form-control" />
+      </div>
+    </div>
+    <div>
+      <div *ngFor="let category of categories2">
+        <label for="{{ category }}">{{ category }}</label>
+        <input type="number" name="{{ category }}" class="form-control" />
+      </div>
+    </div>
+    <div>
+      <div *ngFor="let category of categories3">
+        <label for="{{ category }}">{{ category }}</label>
+        <input type="number" name="{{ category }}" class="form-control" />
+      </div>
+    </div>
+  </div>
+  <hr>
+  <input type="submit" value="Submit" class="btn app-btn-secondary float-end">
+</form>
