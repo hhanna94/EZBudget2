@@ -38,6 +38,6 @@ export class ExpenseFormComponent implements OnInit {
       this.errorMsg = "All fields are required. Please enter a valid expense."
       return;
     }
-    console.log(form.value);
+    this.expenseService.createExpense(form.value);
   }
 }

@@ -28,7 +28,7 @@ namespace API.Services
 
         public ActionResult<User> GetOneUser(int id)
         {
-            return _context.Users.Find(id);
+            return _context.Users.FirstOrDefault(user => user.Id == id);
         }
 
         public User FindUserByUsername(string username) {

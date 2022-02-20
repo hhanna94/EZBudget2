@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExpenseService } from '../expense.service';
 
 @Component({
   selector: 'app-expense-detail',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expense-detail.component.css']
 })
 export class ExpenseDetailComponent implements OnInit {
+  expenses = [];
 
-  constructor() { }
+  constructor(private expenseService: ExpenseService) { }
 
   ngOnInit(): void {
+    let userId = JSON.parse(localStorage.getItem("userData")).id;
+    this.expenseService.getUserExpenses(userId);
   }
 
 }

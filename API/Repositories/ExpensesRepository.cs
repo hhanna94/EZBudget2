@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
 using API.Data;
+using API.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Repositories
 {
@@ -9,5 +12,12 @@ namespace API.Repositories
         {
             _context = context;
         }
+
+        public ActionResult<Expense> CreateExpense(Expense newExpense) {
+            Expense expense = _context.Expenses.Add(newExpense).Entity;
+            _context.SaveChanges();
+            return expense;
+        }
+
     }
 }
