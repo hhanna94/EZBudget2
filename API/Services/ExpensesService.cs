@@ -17,12 +17,20 @@ namespace API.Services
 
         public ActionResult<Expense> CreateExpense(Expense newExpense)
         {
-            var expense =  _repo.CreateExpense(newExpense);
+            Expense expense =  _repo.CreateExpense(newExpense);
             if (expense == null)
             {
                 throw new Exception("Failed to create an expense.");
             }
             return expense;
         }
+
+        public ActionResult<List<Expense>> GetUserExpenses(int userId)
+        {
+            List<Expense> expenses = _repo.GetUserExpenses(userId);
+            return expenses;
+        }
+
+        
     }
 }

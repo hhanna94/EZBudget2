@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Models;
@@ -13,10 +15,18 @@ namespace API.Repositories
             _context = context;
         }
 
-        public ActionResult<Expense> CreateExpense(Expense newExpense) {
+        public Expense CreateExpense(Expense newExpense) {
             Expense expense = _context.Expenses.Add(newExpense).Entity;
             _context.SaveChanges();
             return expense;
+        }
+
+        public List<Expense> GetUserExpenses(int userId)
+        {
+            List<Expense> expenses = _context.Expenses
+                .Where(expense => expense.UserId == userId)
+                .ToList();
+            return expenses;
         }
 
     }

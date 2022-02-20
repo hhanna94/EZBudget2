@@ -27,16 +27,15 @@ namespace API.Controllers
             {
                 return BadRequest("Failed to create expense.");
             }
-            return expense;
+            return Ok(expense);
         }
 
         [Authorize]
         [HttpGet("{userId}")]
-        public List<Expense> GetUserExpenses(int userId)
+        public IActionResult GetUserExpenses(int userId)
         {
-            User user = _userService.GetOneUser(userId).Value;
-            Console.WriteLine(JsonConvert.SerializeObject(user));
-            return user.Expenses;
+            IEnumerable<Expense> expenses = _service.GetUserExpenses(userId).Value.ToArray();
+            return Ok(expenses);
         }
     }
 }
