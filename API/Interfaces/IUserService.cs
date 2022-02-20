@@ -9,10 +9,10 @@ namespace API.Interfaces
     public interface IUserService
     {
         // Return a list of all users
-        Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers();
+        Task<ActionResult<IEnumerable<User>>> GetAllUsers();
 
         // Return a user
-        ActionResult<UserModel> GetOneUser(int id);
+        ActionResult<User> GetOneUser(int id);
 
         // Register a new user
         Task<ActionResult<UserDTO>> RegisterUser(RegisterDTO registerUser);

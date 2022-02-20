@@ -25,7 +25,7 @@ namespace API.Controllers
         // /api/users => get a list of all users
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserModel>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _userService.GetAllUsers();
         }
@@ -33,7 +33,7 @@ namespace API.Controllers
         // /api/users/{id} => get a user by ID
         [Authorize]
         [HttpGet("{id}")]
-        public ActionResult<UserModel> GetUser(int id)
+        public ActionResult<User> GetUser(int id)
         {
             return _userService.GetOneUser(id);
         }

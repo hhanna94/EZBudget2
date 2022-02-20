@@ -22,21 +22,21 @@ namespace API.Services
             _tokenService = tokenService;
         }
 
-        public async Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers() {
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers() {
             return await _context.Users.ToListAsync();
         }
 
-        public ActionResult<UserModel> GetOneUser(int id)
+        public ActionResult<User> GetOneUser(int id)
         {
             return _context.Users.Find(id);
         }
 
-        public UserModel FindUserByUsername(string username) {
+        public User FindUserByUsername(string username) {
             var user =  _context.Users.SingleOrDefault(x => x.UserName == username.ToLower());
             return user;
         }
 
-        public bool VerifyPassword(UserModel user, LoginDTO loginUser) {
+        public bool VerifyPassword(User user, LoginDTO loginUser) {
             using var hmac = new HMACSHA512(user.PasswordSalt);
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginUser.Password));
             for (int i = 0; i < computedHash.Length; i++)
@@ -46,7 +46,7 @@ namespace API.Services
             return true;
         }
 
-        public UserDTO GenerateUserToken(UserModel user) {
+        public UserDTO GenerateUserToken(User user) {
             return new UserDTO
             {
                 UserName = user.UserName,
@@ -59,7 +59,7 @@ namespace API.Services
         public async Task<ActionResult<UserDTO>> RegisterUser(RegisterDTO registerUser)
         {
             using var hmac = new HMACSHA512();
-            var user = new UserModel
+            var user = new User
             {
                 UserName = registerUser.UserName.ToLower(),
                 FirstName = registerUser.FirstName,
