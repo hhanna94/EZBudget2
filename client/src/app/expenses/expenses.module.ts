@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { ExpenseDetailComponent } from './expense-detail/expense-detail.component';
 import { ExpenseRoutingModule } from './expenses-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { ExpenseRoutingModule } from './expenses-routing.module';
   ],
   imports: [
     CommonModule,
-    ExpenseRoutingModule
+    ExpenseRoutingModule,
+    FormsModule
   ]
 })
 export class ExpensesModule { }
