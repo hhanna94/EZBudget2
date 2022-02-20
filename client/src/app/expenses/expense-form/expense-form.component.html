@@ -7,7 +7,7 @@
       <option value="">-- Category --</option>
       <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
     </select>
-    <input type="hidden" name="User" ngModel/>
+    <input type="hidden" name="UserId" [(ngModel)]="expenseDTO.UserId" />
     <input type="submit" value="Add" class="btn app-btn-secondary">
   </div>
 </form>
