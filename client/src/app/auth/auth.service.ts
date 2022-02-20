@@ -53,7 +53,7 @@ export class AuthService {
 
   private handleAuthentication(userToken: UserToken) {
     const expirationDate = new Date(new Date().getTime() + (604800 * 1000))
-    const user = new UserToken(userToken.userName, userToken.token, expirationDate);
+    const user = new UserToken(userToken.id, userToken.userName, userToken.token, expirationDate);
     this.user.next(user);
     this.autoLogout(604800 * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
@@ -74,6 +74,7 @@ export class AuthService {
     }
 
     const loadedUser = new UserToken(
+      userData.id,
       userData.userName,
       userData.token,
       new Date(userData.expirationDate)

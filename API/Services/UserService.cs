@@ -50,7 +50,8 @@ namespace API.Services
             return new UserDTO
             {
                 UserName = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                Id = user.Id
             };
         }
 
