@@ -31,11 +31,23 @@ namespace API.Controllers
         }
 
         [Authorize]
-        [HttpGet("{userId}")]
+        [HttpGet("user/{userId}")]
         public IActionResult GetUserExpenses(int userId)
         {
             IEnumerable<Expense> expenses = _service.GetUserExpenses(userId).Value.ToArray();
             return Ok(expenses);
+        }
+
+        [Authorize]
+        [HttpPut("{expenseId}")]
+        public ActionResult<Expense> UpdateExpense(Expense updatedExpense)
+        {
+            Expense expense = _service.UpdateExpense(updatedExpense).Value;
+            if (expense == null)
+            {
+                return BadRequest("Failed to update expense.");
+            }
+            return Ok(expense);
         }
     }
 }

@@ -18,9 +18,9 @@ export class ExpenseDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     let userId = JSON.parse(localStorage.getItem("userData")).id;
     this.expenseService.getUserExpenses(userId);
-    this.isLoading = true;
     this.expensesSub = this.expenseService.getExpensesUpdateListener()
-      .subscribe( expenses => {
+    .subscribe( expenses => {
+        this.isLoading = true;
         this.expenses = expenses;
         this.isLoading = false;
       })

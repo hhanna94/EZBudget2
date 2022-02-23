@@ -54,7 +54,9 @@ export class ExpenseFormComponent implements OnInit, OnDestroy {
       this.expenseService.createExpense(form.value);
       form.resetForm();
     } else {
-      
+      this.expenseService.updateExpense(form.value);
+      form.resetForm();
+      this.isEditMode = false;
     }
   }
 

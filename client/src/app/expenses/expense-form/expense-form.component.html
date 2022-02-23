@@ -9,7 +9,7 @@
     </select>
     <input type="hidden" name="userId" [(ngModel)]="expenseFormData.userId" />
     <input type="hidden" name="expenseId" *ngIf="isEditMode" [(ngModel)]="expenseFormData.expenseId">
-    <input type="submit" value="Add" class="btn app-btn-secondary">
+    <input type="submit" [value]="isEditMode ? 'Edit' : 'Add'" class="btn app-btn-secondary">
     <button (click)="onClear()" type="button" class="btn btn-secondary">Clear</button>
   </div>
 </form>

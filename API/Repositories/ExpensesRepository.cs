@@ -29,5 +29,12 @@ namespace API.Repositories
             return expenses;
         }
 
+        public Expense UpdateExpense(Expense updatedExpense)
+        {
+            Expense expense = _context.Expenses.Update(updatedExpense).Entity;
+            _context.SaveChanges();
+            return expense;
+        }
+
     }
 }

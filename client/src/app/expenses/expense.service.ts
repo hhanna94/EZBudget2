@@ -38,7 +38,7 @@ export class ExpenseService {
   }
 
   createExpense(expense: ExpenseDTO) {
-    this.http.post('http://localhost:5000/api/expenses', expense)
+    this.http.post<Expense>('http://localhost:5000/api/expenses', expense)
       .subscribe({
         next: res => {
           console.log(res);
@@ -51,7 +51,7 @@ export class ExpenseService {
   }
 
   getUserExpenses(userId: number) {
-    this.http.get<any[]>(`http://localhost:5000/api/expenses/${userId}`)
+    this.http.get<any[]>(`http://localhost:5000/api/expenses/user/${userId}`)
       .subscribe({
         next: res => {
           this.expenses = res;
@@ -59,6 +59,19 @@ export class ExpenseService {
         },
         error: err => console.log(err)
       })
+  }
+
+  updateExpense(expense: Expense) {
+    this.http.put<Expense>(`http://localhost:5000/api/expenses/${expense.expenseId}`, expense)
+    .subscribe({
+      next: res => {
+        console.log(res);
+        this.expenses.push(res);
+        this._expensesUpdated.next([...this.expenses]);
+      },
+      error: err => {
+        console.log(err);
+    }})
   }
 
 

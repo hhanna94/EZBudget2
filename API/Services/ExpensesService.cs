@@ -18,10 +18,6 @@ namespace API.Services
         public ActionResult<Expense> CreateExpense(Expense newExpense)
         {
             Expense expense =  _repo.CreateExpense(newExpense);
-            if (expense == null)
-            {
-                throw new Exception("Failed to create an expense.");
-            }
             return expense;
         }
 
@@ -31,6 +27,10 @@ namespace API.Services
             return expenses;
         }
 
-        
+        public ActionResult<Expense> UpdateExpense(Expense newExpense)
+        {
+            Expense expense =  _repo.UpdateExpense(newExpense);
+            return expense;
+        }
     }
 }
