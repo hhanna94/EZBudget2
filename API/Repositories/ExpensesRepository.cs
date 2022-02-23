@@ -36,5 +36,14 @@ namespace API.Repositories
             return expense;
         }
 
+        public Expense DeleteExpense(int expenseId)
+        {
+            Expense expenseToDelete = _context.Expenses.FirstOrDefault(expense => expense.ExpenseId == expenseId);
+            Expense deletedExpense = _context.Expenses.Remove(expenseToDelete).Entity;
+            
+            _context.SaveChanges();
+            return deletedExpense;
+        }
+
     }
 }

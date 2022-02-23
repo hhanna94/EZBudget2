@@ -26,7 +26,7 @@ export class ExpenseService {
 
   set selectedExpense(expense: Expense) {
     this._selectedExpense = expense;
-    this._selectedExpenseUpdated.next(this._selectedExpense);
+    this._selectedExpenseUpdated.next({...this._selectedExpense});
   }
 
   getExpensesUpdateListener() {
@@ -41,7 +41,6 @@ export class ExpenseService {
     this.http.post<Expense>('http://localhost:5000/api/expenses', expense)
       .subscribe({
         next: res => {
-          console.log(res);
           this.expenses.push(res);
           this._expensesUpdated.next([...this.expenses]);
         },
@@ -64,14 +63,21 @@ export class ExpenseService {
   updateExpense(expense: Expense) {
     this.http.put<Expense>(`http://localhost:5000/api/expenses/${expense.expenseId}`, expense)
     .subscribe({
-      next: res => {
-        console.log(res);
-        this.expenses.push(res);
-        this._expensesUpdated.next([...this.expenses]);
-      },
-      error: err => {
-        console.log(err);
-    }})
+      next: res => this.getUserExpenses(res.userId),
+      error: err => console.log(err)
+    })
+  }
+
+  deleteExpense(expenseId: number) {
+    this.http.delete<Expense>(`http://localhost:5000/api/expenses/${expenseId}`)
+      .subscribe({
+        next: res => {
+          let newExpenses = this.expenses.filter(expense => expense.expenseId !== res.expenseId);
+          this.expenses = newExpenses;
+          this._expensesUpdated.next([...this.expenses]);
+        },
+        error: err => console.log(err)
+      })
   }
 
 

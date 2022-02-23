@@ -18,9 +18,12 @@
         <tr *ngFor="let expense of expenses">
           <td>{{expense.description}}</td>
           <td>{{expense.date | date}}</td>
+          <td>{{expense.amount | currency}}</td>
           <td>{{expense.category}}</td>
-          <td>{{expense.amount}}</td>
-          <td><button class="btn app-btn-secondary py-0 px-2" (click)="onSelect(expense)">Edit</button> | <button class="btn btn-danger py-0 px-1">Delete</button></td>
+          <td>
+            <button class="btn app-btn-secondary py-0 px-2 me-2" (click)="onSelect(expense)">Edit</button>
+            <button class="btn btn-danger py-0 px-1" (click)="onDelete(expense.expenseId)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>

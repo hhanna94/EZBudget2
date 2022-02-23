@@ -30,6 +30,10 @@ export class ExpenseDetailComponent implements OnInit, OnDestroy {
     this.expenseService.selectedExpense = expense;
   }
 
+  onDelete(expenseId: number) {
+    this.expenseService.deleteExpense(expenseId);
+  }
+
   ngOnDestroy(): void {
       this.expensesSub.unsubscribe();
   }

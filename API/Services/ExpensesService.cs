@@ -32,5 +32,10 @@ namespace API.Services
             Expense expense =  _repo.UpdateExpense(newExpense);
             return expense;
         }
+
+        public ActionResult<Expense> DeleteExpense(int expenseId)
+        {
+            return _repo.DeleteExpense(expenseId);
+        }
     }
 }

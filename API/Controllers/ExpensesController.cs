@@ -49,5 +49,17 @@ namespace API.Controllers
             }
             return Ok(expense);
         }
+
+        [Authorize]
+        [HttpDelete("{expenseId}")]
+        public ActionResult<Expense> DeleteExpense(int expenseId)
+        {
+            Expense expense = _service.DeleteExpense(expenseId).Value;
+            if (expense == null)
+            {
+                return BadRequest("Failed to delete expense.");
+            }
+            return Ok(expense);
+        }
     }
 }
