@@ -4,6 +4,7 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { ExpenseDetailComponent } from './expense-detail/expense-detail.component';
 import { ExpenseRoutingModule } from './expenses-routing.module';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ExpenseRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class ExpensesModule { }

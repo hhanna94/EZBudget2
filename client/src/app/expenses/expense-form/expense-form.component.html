@@ -1,14 +1,16 @@
 <form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)">
   <div class="d-flex justify-content-between gap-1">
-    <input type="text" name="Description" id="Description" class="form-control" placeholder="Description" style="width: 30%" ngModel required>
-    <input type="date" name="Date" class="form-control" style="width: 25%" ngModel required/>
-    <input type="number" name="Amount" id="Amount" class="form-control" placeholder="Amount" style="width: 20%" ngModel required>
-    <select name="Category" id="Category" class="form-select" style="width: 25%" ngModel required>
+    <input type="text" name="description" class="form-control" placeholder="Description" style="width: 30%" [(ngModel)]="expenseFormData.description" required>
+    <input type="date" name="date" class="form-control" style="width: 25%" [(ngModel)]="expenseFormData.date" required/>
+    <input type="number" name="amount" class="form-control" placeholder="Amount" style="width: 20%" [(ngModel)]="expenseFormData.amount" required>
+    <select name="category" class="form-select" style="width: 25%" [(ngModel)]="expenseFormData.category" required >
       <option value="">-- Category --</option>
       <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
     </select>
-    <input type="hidden" name="UserId" [(ngModel)]="expenseDTO.UserId" />
+    <input type="hidden" name="userId" [(ngModel)]="expenseFormData.userId" />
+    <input type="hidden" name="expenseId" *ngIf="isEditMode" [(ngModel)]="expenseFormData.expenseId">
     <input type="submit" value="Add" class="btn app-btn-secondary">
+    <button (click)="onClear()" type="button" class="btn btn-secondary">Clear</button>
   </div>
 </form>
 <p *ngIf="errorMsg" class="text-danger mt-2">{{errorMsg}}</p>
