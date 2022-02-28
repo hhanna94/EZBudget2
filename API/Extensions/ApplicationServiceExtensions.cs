@@ -15,6 +15,8 @@ namespace API.Extensions
             services.AddScoped<UserService>();
             services.AddScoped<ExpensesService>();
             services.AddScoped<ExpensesRepository>();
+            services.AddScoped<BudgetService>();
+            services.AddScoped<BudgetRepository>();
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseNpgsql(config.GetConnectionString("DefaultConnection"));

@@ -4,6 +4,7 @@ import { BudgetDetailComponent } from './budget-detail/budget-detail.component';
 import { BudgetRoutingModule } from './budget-routing.module';
 import { BudgetFormComponent } from './budget-form/budget-form.component';
 import { BudgetComponent } from './budget.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -12,6 +13,7 @@ import { BudgetComponent } from './budget.component';
   imports: [
     CommonModule,
     BudgetRoutingModule,
+    FormsModule
   ]
 })
 export class BudgetModule { }

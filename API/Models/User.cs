@@ -13,5 +13,6 @@ namespace API.Models
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public List<Expense> Expenses { get; set; }
+        public List<Budget> Budgets { get; set; }
     }
 }

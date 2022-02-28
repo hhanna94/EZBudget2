@@ -18,10 +18,11 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
-    console.log(form.value);
     if (!form.valid) return;
+
     this.isLoading = true;
-    this.authService.loginUser(form.value).subscribe( res => {
+    this.authService.loginUser(form.value)
+    .subscribe( res => {
       this.router.navigateByUrl("/budget");
     }, error => {
       this.errorMsg = "Invalid login attempt."

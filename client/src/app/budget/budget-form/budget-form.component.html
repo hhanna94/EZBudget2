@@ -1,49 +1,163 @@
-
-<form action="" >
+<form
+  (submit)="onSubmit(budgetForm)"
+  (change)="onChange(budgetForm)"
+  #budgetForm="ngForm"
+>
   <div class="d-flex justify-content-between mt-4">
     <div class="w-50">
       <h5>Name Budget</h5>
-      <input type="text" name="Name" class="form-control" >
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        [(ngModel)]="budgetFormData.name"
+        required
+      />
     </div>
     <div>
       <h5>Set Income</h5>
-      <input type="number" name="Income" class="form-control" />
+      <input
+        type="number"
+        name="income"
+        class="form-control"
+        [(ngModel)]="budgetFormData.income"
+        required
+      />
     </div>
-
   </div>
-  <hr>
+  <hr />
   <div class="d-flex justify-content-between align-items-start">
     <div class="w-50">
       <h5>Set Amount To Remain In Account</h5>
-      <input type="number" name="Remainder" class="form-control w-50"/>
+      <input
+        type="number"
+        name="remainder"
+        class="form-control w-50"
+        [(ngModel)]="budgetFormData.remainder"
+        required
+      />
     </div>
     <div>
       <h5>Set Savings Goal</h5>
-      <input type="text" name="Savings" class="form-control">
+      <input
+        type="text"
+        name="savings"
+        class="form-control"
+        [(ngModel)]="budgetFormData.savings"
+        required
+      />
     </div>
   </div>
-  <hr>
+  <hr />
   <h5>Estimate Monthly Expenses</h5>
   <div class="d-flex justify-content-between">
     <div>
-      <div *ngFor="let category of categories1">
-        <label for="{{ category }}">{{ category }}</label>
-        <input type="number" name="{{ category }}" class="form-control" />
+      <div>
+        <label for="rent">Rent/Mortgage</label>
+        <input
+          type="number"
+          name="rent"
+          class="form-control"
+          [(ngModel)]="budgetFormData.rent"
+          required
+        />
+      </div>
+      <div>
+        <label for="creditCard">Credit Cards</label>
+        <input
+          type="number"
+          name="creditCard"
+          class="form-control"
+          [(ngModel)]="budgetFormData.creditCard"
+          required
+        />
+      </div>
+      <div>
+        <label for="loans">Loans</label>
+        <input
+          type="number"
+          name="loans"
+          class="form-control"
+          [(ngModel)]="budgetFormData.loans"
+          required
+        />
       </div>
     </div>
     <div>
-      <div *ngFor="let category of categories2">
-        <label for="{{ category }}">{{ category }}</label>
-        <input type="number" name="{{ category }}" class="form-control" />
+      <div>
+        <label for="car">Car</label>
+        <input
+          type="number"
+          name="car"
+          class="form-control"
+          [(ngModel)]="budgetFormData.car"
+          required
+        />
+      </div>
+      <div>
+        <label for="health">Health</label>
+        <input
+          type="number"
+          name="health"
+          class="form-control"
+          [(ngModel)]="budgetFormData.health"
+          required
+        />
+      </div>
+      <div>
+        <label for="groceries">Groceries</label>
+        <input
+          type="number"
+          name="groceries"
+          class="form-control"
+          [(ngModel)]="budgetFormData.groceries"
+          required
+        />
       </div>
     </div>
     <div>
-      <div *ngFor="let category of categories3">
-        <label for="{{ category }}">{{ category }}</label>
-        <input type="number" name="{{ category }}" class="form-control" />
+      <div>
+        <label for="utilities">Utilities</label>
+        <input
+          type="number"
+          name="utilities"
+          class="form-control"
+          [(ngModel)]="budgetFormData.utilities"
+          required
+        />
+      </div>
+      <div>
+        <label for="entertainment">Entertainment</label>
+        <input
+          type="number"
+          name="entertainment"
+          class="form-control"
+          [(ngModel)]="budgetFormData.entertainment"
+          required
+        />
+      </div>
+      <div>
+        <label for="misc">Misc</label>
+        <input
+          type="number"
+          name="misc"
+          class="form-control"
+          [(ngModel)]="budgetFormData.misc"
+          required
+        />
       </div>
     </div>
+    <input type="hidden" name="userId" [(ngModel)]="budgetFormData.userId" />
   </div>
-  <hr>
-  <input type="submit" value="Submit" class="btn app-btn-secondary float-end">
+  <hr />
+  <div class="d-flex justify-content-between">
+    <h6>
+      Available Money:
+      <span [ngClass]="{ 'text-danger': availableBudget < 0 }">{{
+        availableBudget | currency
+      }}</span>
+    </h6>
+    <p class="text-danger" *ngIf="errorMsg">*{{errorMsg}}</p>
+    <input type="submit" value="Submit" class="btn app-btn-secondary" />
+  </div>
 </form>
